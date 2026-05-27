@@ -126,27 +126,24 @@ Run as many isolated bots as you want — each with its own token, memory, and d
 ### Docker Compose
 ```bash
 # Set tokens in .env
-echo "MICHAEL_TELEGRAM_TOKEN=123:abc" >> .env
-echo "BECCA_TELEGRAM_TOKEN=456:def" >> .env
+echo "NEXTSTEP_TELEGRAM_TOKEN=123:abc" >> .env
 echo "DEEPSEEK_API_KEY=sk-..." >> .env
 
-# Create per-person family files
-cp family.json.template family-michael.json
-cp family.json.template family-becca.json
+# Use the included family.json or create your own
+cp family.json.template family.json
 
-# Start both
+# Start
 docker-compose up -d
 ```
 
 ### Systemd
 ```bash
-# Create separate directories
-mkdir -p ~/bots/michael ~/bots/becca
+# Create a separate directory per instance
+mkdir -p ~/bots/next-step
 
 # Copy bot files and create .env per instance
-# Install as separate systemd services:
-#   next-step-michael.service
-#   next-step-becca.service
+# Install as a systemd service:
+#   next-step-bot.service
 ```
 
 ---

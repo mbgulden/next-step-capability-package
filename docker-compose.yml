@@ -6,53 +6,62 @@
 #   - Human Design profile
 #
 # Usage:
-#   1. Copy .env.example to .env and fill in your tokens
-#   2. docker-compose up -d
+#   1. Copy the example env block below into a .env file
+#   2. Fill in your tokens
+#   3. docker-compose up -d
+#
+# To add more profiles, copy the next-step service block and change:
+#   - container_name
+#   - TELEGRAM_BOT_TOKEN
+#   - NEXTSTEP_PROFILE
+#   - volume names
 
 version: "3.8"
 
 services:
-  # ── Michael's Bot ────────────────────────────────────────────
-  next-step-michael:
+  # ── Primary Bot ───────────────────────────────────────────────
+  next-step:
     build: .
-    container_name: next-step-michael
+    container_name: next-step
     restart: always
     environment:
-      - TELEGRAM_BOT_TOKEN=${MICHAEL_TELEGRAM_TOKEN}
+      - TELEGRAM_BOT_TOKEN=${NEXTSTEP_TELEGRAM_TOKEN}
       - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
       - NEXTSTEP_MCP_SRC=/app/mcp-server/hd-mcp-server/src
       - NEXTSTEP_DB_PATH=/app/data/next_step.db
       - NEXTSTEP_NAME=Jamie
-      - NEXTSTEP_PROFILE=michael
-      - NEXTSTEP_FAMILY_PATH=/app/family-michael.json
+      - NEXTSTEP_PROFILE=next-step
+      - NEXTSTEP_FAMILY_PATH=/app/family.json
+      - NEXTSTEP_ACTIVE_PROFILE=${NEXTSTEP_ACTIVE_PROFILE:-michael}
     volumes:
-      - michael_data:/app/data
-      - ./family-michael.json:/app/family-michael.json:ro
+      - next_step_data:/app/data
+      - ./family.json:/app/family.json:ro
     networks:
       - next-step-net
 
-  # ── Becca's Bot ──────────────────────────────────────────────
-  next-step-becca:
-    build: .
-    container_name: next-step-becca
-    restart: always
-    environment:
-      - TELEGRAM_BOT_TOKEN=${BECCA_TELEGRAM_TOKEN}
-      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
-      - NEXTSTEP_MCP_SRC=/app/mcp-server/hd-mcp-server/src
-      - NEXTSTEP_DB_PATH=/app/data/next_step.db
-      - NEXTSTEP_NAME=Jamie
-      - NEXTSTEP_PROFILE=becca
-      - NEXTSTEP_FAMILY_PATH=/app/family-becca.json
-    volumes:
-      - becca_data:/app/data
-      - ./family-becca.json:/app/family-becca.json:ro
-    networks:
-      - next-step-net
+  # ── Example: second profile (uncomment and configure) ─────────
+  # next-step-second:
+  #   build: .
+  #   container_name: next-step-second
+  #   restart: always
+  #   environment:
+  #     - TELEGRAM_BOT_TOKEN=${NEXTSTEP_SECOND_TOKEN}
+  #     - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
+  #     - NEXTSTEP_MCP_SRC=/app/mcp-server/hd-mcp-server/src
+  #     - NEXTSTEP_DB_PATH=/app/data/next_step.db
+  #     - NEXTSTEP_NAME=Jamie
+  #     - NEXTSTEP_PROFILE=next-step-second
+  #     - NEXTSTEP_FAMILY_PATH=/app/family.json
+  #     - NEXTSTEP_ACTIVE_PROFILE=${NEXTSTEP_SECOND_ACTIVE_PROFILE:-becca}
+  #   volumes:
+  #     - next_step_second_data:/app/data
+  #     - ./family.json:/app/family.json:ro
+  #   networks:
+  #     - next-step-net
 
 volumes:
-  michael_data:
-  becca_data:
+  next_step_data:
+  # next_step_second_data:
 
 networks:
   next-step-net:
