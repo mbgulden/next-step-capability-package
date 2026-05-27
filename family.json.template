@@ -1,0 +1,55 @@
+{
+  "family": {
+    "michael": {
+      "name": "Michael",
+      "year": 1989, "month": 12, "day": 10, "hour": 17.1167,
+      "location": "Simi Valley CA",
+      "lat": 34.2694, "lon": -118.7815,
+      "timezone": "America/Los_Angeles",
+      "hd_type": "Projector",
+      "profile": "3/5",
+      "authority": "Splenic"
+    },
+    "becca": {
+      "name": "Becca",
+      "year": 1991, "month": 7, "day": 11, "hour": 9.75,
+      "location": "Provo UT",
+      "lat": 40.2338, "lon": -111.6585,
+      "timezone": "America/Denver",
+      "hd_type": "Projector",
+      "profile": "6/2",
+      "authority": "Splenic"
+    },
+    "benjamin": {
+      "name": "Benjamin",
+      "year": 2014, "month": 3, "day": 22, "hour": 12.3833,
+      "location": "Provo UT",
+      "lat": 40.2338, "lon": -111.6585,
+      "timezone": "America/Denver",
+      "hd_type": "Manifesting Generator",
+      "profile": "5/1",
+      "authority": "Sacral"
+    },
+    "william": {
+      "name": "William",
+      "year": 2016, "month": 8, "day": 15, "hour": 15.7,
+      "location": "Provo UT",
+      "lat": 40.2338, "lon": -111.6585,
+      "timezone": "America/Denver",
+      "hd_type": "Generator",
+      "profile": "3/6",
+      "authority": "Sacral"
+    },
+    "victoria": {
+      "name": "Victoria",
+      "year": 2018, "month": 7, "day": 2, "hour": 11.25,
+      "location": "Provo UT",
+      "lat": 40.2338, "lon": -111.6585,
+      "timezone": "America/Denver",
+      "hd_type": "Generator",
+      "profile": "4/1",
+      "authority": "Sacral"
+    }
+  },
+  "active": "michael"
+}

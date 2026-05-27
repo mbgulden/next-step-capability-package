@@ -1,0 +1,49 @@
+# Hermes Agent — Next Step Profile Template
+# Copy this into ~/.hermes/profiles/next-step-<name>/config.yaml
+# after creating the profile with:
+#   hermes profile create next-step-YOURNAME --clone-from <base-profile>
+#
+# Then: hermes gateway install next-step-YOURNAME
+#       hermes gateway start next-step-YOURNAME
+
+model:
+  default: deepseek-v4-pro
+  provider: deepseek
+
+providers: {}  # Inherits from parent profile or global config
+
+# MCP Server: Human Design calculation engine
+# Uncomment and adjust the path to your OpenHumanDesignMCP clone
+# mcp_servers:
+#   human-design:
+#     command: python
+#     args:
+#       - -m
+#       - mcp_server
+#     cwd: /path/to/OpenHumanDesignMCP/hd-mcp-server/src
+#     enabled: true
+
+# Skills: task management + HD coaching
+skills:
+  external_dirs:
+    - /path/to/next-step-capability-package/skills
+
+# Telegram platform (set tokens in .env, not here)
+telegram:
+  reactions: false
+
+# Display
+display:
+  personality: friendly
+  show_reasoning: false
+  final_response_markdown: strip
+
+# Memory
+memory:
+  memory_enabled: true
+  user_profile_enabled: true
+
+# Profile identity
+platforms:
+  telegram:
+    enabled: true

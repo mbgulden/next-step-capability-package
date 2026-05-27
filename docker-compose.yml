@@ -1,0 +1,59 @@
+# Next Step Bot — Multi-Instance Deployment
+# Each service is a completely isolated bot with its own:
+#   - Telegram token
+#   - Memory / conversation history
+#   - Task database
+#   - Human Design profile
+#
+# Usage:
+#   1. Copy .env.example to .env and fill in your tokens
+#   2. docker-compose up -d
+
+version: "3.8"
+
+services:
+  # ── Michael's Bot ────────────────────────────────────────────
+  next-step-michael:
+    build: .
+    container_name: next-step-michael
+    restart: always
+    environment:
+      - TELEGRAM_BOT_TOKEN=${MICHAEL_TELEGRAM_TOKEN}
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
+      - NEXTSTEP_MCP_SRC=/app/mcp-server/hd-mcp-server/src
+      - NEXTSTEP_DB_PATH=/app/data/next_step.db
+      - NEXTSTEP_NAME=Jamie
+      - NEXTSTEP_PROFILE=michael
+      - NEXTSTEP_FAMILY_PATH=/app/family-michael.json
+    volumes:
+      - michael_data:/app/data
+      - ./family-michael.json:/app/family-michael.json:ro
+    networks:
+      - next-step-net
+
+  # ── Becca's Bot ──────────────────────────────────────────────
+  next-step-becca:
+    build: .
+    container_name: next-step-becca
+    restart: always
+    environment:
+      - TELEGRAM_BOT_TOKEN=${BECCA_TELEGRAM_TOKEN}
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
+      - NEXTSTEP_MCP_SRC=/app/mcp-server/hd-mcp-server/src
+      - NEXTSTEP_DB_PATH=/app/data/next_step.db
+      - NEXTSTEP_NAME=Jamie
+      - NEXTSTEP_PROFILE=becca
+      - NEXTSTEP_FAMILY_PATH=/app/family-becca.json
+    volumes:
+      - becca_data:/app/data
+      - ./family-becca.json:/app/family-becca.json:ro
+    networks:
+      - next-step-net
+
+volumes:
+  michael_data:
+  becca_data:
+
+networks:
+  next-step-net:
+    driver: bridge
